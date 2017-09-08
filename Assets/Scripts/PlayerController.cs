@@ -8,6 +8,13 @@ public class PlayerController : MonoBehaviour {
 	public GameController gameController;
 	public int speed;
 	private int movesLeft;
+	public double personalCombat;
+	public double diplomacy;
+	public double skullduggery;
+	public int gold;
+	public double morale;
+	public double shipCombat;
+	public double luck;
 
 	// Use this for initialization
 	void Start () {

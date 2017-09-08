@@ -5,16 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.Events; 
 using UnityEngine.EventSystems; 
 
-public class ModalPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+public class ModalPanel : MonoBehaviour {
 
 	public Text prompt;
 	public Image image;
-	public Button option1;
-	public Button option2;
-	public Button option3;
-	public Button option4;
-	public Button option5;
 	public GameObject modalPanelObject;
+	public TestEventCard testEventCard;
 
 	private static ModalPanel modalPanel;
 
@@ -28,28 +24,48 @@ public class ModalPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 		return modalPanel;
 	}
 
-	public void Options (string prompt, UnityAction event1, UnityAction event2, UnityAction event3, UnityAction event4, UnityAction event5) {
+	public void Options (string prompt, Image image, UnityAction event1, UnityAction event2, UnityAction event3, UnityAction event4, UnityAction event5) {
 		modalPanelObject.SetActive (true);
-		Button[] allButtons = new Button[] { option1, option2, option3, option4, option5 };
-		this.prompt.text = prompt;
-		foreach (Button option in allButtons) {
-			option.onClick.RemoveAllListeners ();
-			option.onClick.AddListener (event1);
-			option.onClick.AddListener (ClosePanel);
-			option.gameObject.SetActive (true);
+
+//		var allButtons = new [] {
+//			new AssemblyCSharp.EventChoice {
+//				button = option1,
+//				onClick = event1
+//			},
+//			new AssemblyCSharp.EventChoice {
+//				button = option1,
+//				onClick = event1
+//			},
+//			new AssemblyCSharp.EventChoice {
+//				button = option1,
+//				onClick = event1
+//			},
+//			new AssemblyCSharp.EventChoice {
+//				button = option1,
+//				onClick = event1
+//			},
+//			new AssemblyCSharp.EventChoice {
+//				button = option1,
+//				onClick = event1
+//			},
+//		};
+
+		this.prompt.text = testEventCard.eventCard.Prompt;
+		this.image = testEventCard.eventCard.Image;
+		this.prompt.gameObject.SetActive (true);
+		this.image.gameObject.SetActive (true);
+
+		foreach (var option in testEventCard.eventCard.allButtons) {
+			option.button.onClick.RemoveAllListeners ();
+			option.button.onClick.AddListener (option.onClick);
+			option.button.onClick.AddListener (ClosePanel);
+			option.button.gameObject.SetActive (true);
 		}
 	}
 
 	void ClosePanel() {
+		this.prompt.gameObject.SetActive (false);
+		this.image.gameObject.SetActive (false);
 		modalPanelObject.SetActive (false);
-	}
-	// Use this for initialization
-	public void OnPointerEnter(PointerEventData eventData)
-	{
-		
-	}
-
-	public void OnPointerExit(PointerEventData eventData)
-	{
 	}
 }
