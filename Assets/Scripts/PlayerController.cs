@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 	public Rigidbody rb;
 	public GameController gameController;
 	public int speed;
-	private int movesLeft;
+	public bool canMove = true;
 	public double personalCombat;
 	public double diplomacy;
 	public double skullduggery;
@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		movesLeft = speed;
 	}
 
 	// Update is called once per frame
@@ -38,26 +37,28 @@ public class PlayerController : MonoBehaviour {
 
 	void Update ()
 	{
-		rb.position = new Vector3 (
-			Mathf.Clamp (rb.position.x, -gameController.mapWidth, gameController.mapWidth),
-			Mathf.Clamp (rb.position.y, -gameController.mapHeight, gameController.mapHeight),
-			0.0f
-		);
-		int moveHorizontal = 0;
-		int moveVertical = 0;
+		if (canMove) {
+			rb.position = new Vector3 (
+				Mathf.Clamp (rb.position.x, -gameController.mapWidth, gameController.mapWidth),
+				Mathf.Clamp (rb.position.y, -gameController.mapHeight, gameController.mapHeight),
+				0.0f
+			);
+			int moveHorizontal = 0;
+			int moveVertical = 0;
 
-		if (gameController.turn != 0)
-			return;
+			if (gameController.turn != 0)
+				return;
 
-		moveHorizontal = (int)(Input.GetAxisRaw ("Horizontal"));
-		moveVertical = (int)(Input.GetAxisRaw ("Vertical"));
+			moveHorizontal = (int)(Input.GetAxisRaw ("Horizontal"));
+			moveVertical = (int)(Input.GetAxisRaw ("Vertical"));
 
-		if (moveHorizontal != 0) {
-			moveVertical = 0;
-		}
+			if (moveHorizontal != 0) {
+				moveVertical = 0;
+			}
 
-		if (moveHorizontal != 0 || moveVertical != 0) {
-			AttemptMove (moveHorizontal, moveVertical);
+			if (moveHorizontal != 0 || moveVertical != 0) {
+				AttemptMove (moveHorizontal, moveVertical);
+			}
 		}
 	}
 }

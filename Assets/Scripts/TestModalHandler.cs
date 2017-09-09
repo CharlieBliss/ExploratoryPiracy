@@ -12,7 +12,6 @@ public class TestModalHandler : MonoBehaviour {
 	private UnityAction myOption4;
 	private UnityAction myOption5;
 	private UnityAction myOption3;
-	private Image image;
 
 	void Awake() {
 		modalPanel = ModalPanel.Instance ();
@@ -24,8 +23,8 @@ public class TestModalHandler : MonoBehaviour {
 		myOption5 = new UnityAction (TestOption5);
 	}
 
-	public void Test() {
-		modalPanel.Options ("You find a lonely man on this deserted island. He speaks in crazed language about the end of the world. As you approach the him, he points a finger to the sky", image, myOption1, myOption2, myOption3, myOption4, myOption5);
+	public void OnTriggerEnter() {
+//		modalPanel.Options ("You find a lonely man on this deserted island. He speaks in crazed language about the end of the world. As you approach the him, he points a finger to the sky", myOption1, myOption2, myOption3, myOption4, myOption5);
 	}
 		
 	//Wrapped in unity actions

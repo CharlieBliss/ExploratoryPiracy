@@ -9,8 +9,16 @@ public class ModalPanel : MonoBehaviour {
 
 	public Text prompt;
 	public Image image;
+	public Button option1;
+	public Button option2;
+	public Button option3;
+	public Button option4;
+	public Button option5;
+	private UnityAction newAction;
+	public PlayerController player;
+
+
 	public GameObject modalPanelObject;
-	public TestEventCard testEventCard;
 
 	private static ModalPanel modalPanel;
 
@@ -24,48 +32,79 @@ public class ModalPanel : MonoBehaviour {
 		return modalPanel;
 	}
 
-	public void Options (string prompt, Image image, UnityAction event1, UnityAction event2, UnityAction event3, UnityAction event4, UnityAction event5) {
-		modalPanelObject.SetActive (true);
+	void TestOption1 (AssemblyCSharp.EventCard eventCard) {
+		Options(eventCard);
+	}
 
-//		var allButtons = new [] {
-//			new AssemblyCSharp.EventChoice {
-//				button = option1,
-//				onClick = event1
-//			},
-//			new AssemblyCSharp.EventChoice {
-//				button = option1,
-//				onClick = event1
-//			},
-//			new AssemblyCSharp.EventChoice {
-//				button = option1,
-//				onClick = event1
-//			},
-//			new AssemblyCSharp.EventChoice {
-//				button = option1,
-//				onClick = event1
-//			},
-//			new AssemblyCSharp.EventChoice {
-//				button = option1,
-//				onClick = event1
-//			},
-//		};
+	public void Options (AssemblyCSharp.EventCard eventCard) {
+		var allButtons = new [] {
+			new {
+				name = option1,
+				choice = eventCard.Choice1
+			},
+			new {
+				name = option2,
+				choice = eventCard.Choice2,
+			},
+			new {
+				name = option3,
+				choice = eventCard.Choice3,
+			},
+			new {
+				name = option4,
+				choice = eventCard.Choice4,
+			},
+			new {
+				name = option5,
+				choice = eventCard.Choice5,
+			}
+		};
 
-		this.prompt.text = testEventCard.eventCard.Prompt;
-		this.image = testEventCard.eventCard.Image;
-		this.prompt.gameObject.SetActive (true);
-		this.image.gameObject.SetActive (true);
+		foreach (var option in allButtons) {
+			option.name.gameObject.SetActive (false);
 
-		foreach (var option in testEventCard.eventCard.allButtons) {
-			option.button.onClick.RemoveAllListeners ();
-			option.button.onClick.AddListener (option.onClick);
-			option.button.onClick.AddListener (ClosePanel);
-			option.button.gameObject.SetActive (true);
+			if (option.choice != null) {
+				modalPanelObject.SetActive (true);
+				player.canMove = false;
+
+
+				this.prompt.text = eventCard.Prompt;
+				this.prompt.gameObject.SetActive (true);
+				option.name.gameObject.SetActive (true);
+				option.name.gameObject.GetComponentsInChildren<Text> () [0].text = option.choice.choiceText;
+			
+				option.name.onClick.RemoveAllListeners ();
+				if (option.choice.successChance == 0) {
+					option.name.onClick.AddListener (ClosePanel);
+				} else {
+					float random = Random.value;
+					print (random);
+					print(option.choice.successChance);
+					if (random >= .99 && option.choice.altNextCard != null) {
+						option.name.onClick.AddListener (delegate {
+							TestOption1 (option.choice.altNextCard);
+						});
+					}
+					if (option.choice.successChance > random * 100) {
+						option.name.onClick.AddListener (delegate {
+							TestOption1 (option.choice.successNextCard);
+						});
+					} else if (option.choice.successChance != 0) {
+						option.name.onClick.AddListener (delegate {
+							TestOption1 (option.choice.failureNextCard);
+						});
+					}
+				}
+			}
 		}
 	}
+
+
 
 	void ClosePanel() {
 		this.prompt.gameObject.SetActive (false);
 		this.image.gameObject.SetActive (false);
 		modalPanelObject.SetActive (false);
+		player.canMove = true;
 	}
 }
