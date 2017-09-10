@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23494414114518322}
   - component: {fileID: 114511436980422086}
   - component: {fileID: 54283280808328104}
+  - component: {fileID: 114090625810205064}
   m_Layer: 0
   m_Name: ringisland
   m_TagString: Untagged
@@ -104,6 +105,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33375345197633328
 MeshFilter:
@@ -141,6 +143,18 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114090625810205064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1628438281412744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f34da1b970f4cb083bc99963f2567a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
 --- !u!114 &114511436980422086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,6 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9db8811b13c0244b103b63d72d3c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 0}
+  testEventCard: {fileID: 114090625810205064}
 --- !u!212 &212104386726060782
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -182,8 +198,15 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1f3c751ab058bc249b842a242ea0ff4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
