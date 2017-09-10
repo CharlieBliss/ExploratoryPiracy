@@ -9,6 +9,7 @@ public class RingIslandTrigger : MonoBehaviour {
 	private ModalPanel modalPanel;
 	public Image image;
 	public TestEventCard testEventCard;
+	public bool used;
 
 	// Use this for initialization
 
@@ -17,8 +18,9 @@ public class RingIslandTrigger : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col) {
-		if (col.name == "Player") {
+		if (col.name == "Player" && used == false) {
 			modalPanel.Options (testEventCard.eventCard);
+			used = true;
 		}
 	}
 }

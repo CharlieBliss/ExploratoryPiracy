@@ -60,6 +60,7 @@
      <Compile Include="Assets\Completed\Scripts\SoundManager.cs" />
      <Compile Include="Assets\Completed\Scripts\Wall.cs" />
      <Compile Include="Assets\Scripts\ButtonBehavior.cs" />
+     <Compile Include="Assets\Scripts\EmptyClass.cs" />
      <Compile Include="Assets\Scripts\EventCard.cs" />
      <Compile Include="Assets\Scripts\EventChoice.cs" />
      <Compile Include="Assets\Scripts\EventResult.cs" />

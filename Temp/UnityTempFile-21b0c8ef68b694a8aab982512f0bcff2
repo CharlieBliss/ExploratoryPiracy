@@ -106,6 +106,7 @@
 'Assets/Completed/Scripts/SoundManager.cs'
 'Assets/Completed/Scripts/Wall.cs'
 'Assets/Scripts/ButtonBehavior.cs'
+'Assets/Scripts/EmptyClass.cs'
 'Assets/Scripts/EventCard.cs'
 'Assets/Scripts/EventChoice.cs'
 'Assets/Scripts/EventResult.cs'
